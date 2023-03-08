@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Basic A-Frame Scene</title>
+	<meta name="description" content="Basic A-Frame Scene">
+	<script src="https://aframe.io/releases/0.9.2/aframe.min.js"></script>
+</head>
+
+<body>
+
+	<!-- include the audio files correct.mp3 and noob.mp3 from root -->
+	<audio id="correctSound" src="correct.mp3"></audio>
+	<audio id="noobSound" src="noob.mp3"></audio>
+
+	<a-scene inspector="" keyboard-shortcuts="" screenshot="" vr-mode-ui="">
+
+		<a-entity position="-3.60565 1.46369 1.75582" rotation="0 55 0" movement-controls="fly: true">
+			<a-entity id="superView" camera="" look-controls="" wasd-controls="" rotation-reader="" position=""
+				rotation="4.812845479098918 -70.01544256498664 0" data-aframe-inspector-original-camera="">
+
+				<a-entity position="0 0 -3" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+					material="color: cyan; shader: flat" cursor="fuse: true" raycaster="">
+
+					<a-animation begin="click" easing="ease-in" attribute="scale" fill="forwards" from="0.2 0.2 0.2"
+						to="1 1 1" dur="150"></a-animation>
+
+					<a-animation begin="fusing" easing="ease-in" attribute="scale" fill="backwards" from="1 1 1"
+						to="0.2 0.2 0.2" dur="750"></a-animation>
+
+				</a-entity>
+			</a-entity>
+		</a-entity>
+
+		<!--  there is an gltf object inside the models folder
+        import it and put it in the centre of the scene -->
+
+		<a-entity gltf-model="models/flatforest.glb" scale="" position="0 -3.732 0"></a-entity>
+
+		<!-- add a red circle -->
+		<a-sphere class="redCircle" position="-0.0701 2.12538 -3.42165" radius="0.1" color="red" material="" geometry=""
+			visible=""></a-sphere>
+		<a-sphere class="redCircle" position="0.26516 3.53421 -3" radius="0.1" color="red" material=""
+			geometry=""></a-sphere>
+		<a-sphere class="redCircle" position="-0.87742 1.87543 -3" radius="0.1" color="red" material="" geometry=""
+			visible=""></a-sphere>
+		<a-sphere class="redCircle" position="0.18055 3.15575 -3" radius="0.1" color="red" material="" geometry=""
+			visible=""></a-sphere>
+		<a-sphere class="redCircle" position="-0.51254 2.38931 -3" radius="0.1" color="red" material="" geometry=""
+			visible=""></a-sphere>
+		<a-sphere class="redCircle" position="1.13687 3.99621 -3" radius="0.1" color="red" material=""
+			geometry=""></a-sphere>
+		<a-sphere class="redCircle" position="1.40734 2.55605 -3" radius="0.1" color="red" material=""
+			geometry=""></a-sphere>
+
+
+		<a-sphere class="greenCircle" position="2.5 1.5 -3" radius="0.1" color="green" material=""
+			geometry=""></a-sphere>
+		<a-sphere class="greenCircle" position="1.5 5 -3" radius="0.1" color="green" material="" geometry=""></a-sphere>
+		<a-sphere class="greenCircle" position="0 2.5 -3" radius="0.1" color="green" material="" geometry=""></a-sphere>
+		<a-sphere class="greenCircle" position="2.5 11 -3" radius="0.1" color="green" material=""
+			geometry=""></a-sphere>
+		<a-sphere class="greenCircle" position="0.5 3.5 -3" radius="0.1" color="green" material=""
+			geometry=""></a-sphere>
+		<a-sphere class="greenCircle" position="3.5 6 -3" radius="0.1" color="green" material="" geometry=""></a-sphere>
+		<a-sphere class="greenCircle" position="1.5 9.5 -3" radius="0.1" color="green" material=""
+			geometry=""></a-sphere>
+
+		<a-sky color="#444444" material="" geometry=""></a-sky>
+
+
+
+		<script>
+
+			let redCircles = document.querySelectorAll(".redCircle");
+			let greenCircles = document.querySelectorAll(".greenCircle");
+
+			let correctAudio = document.querySelector('#correctSound')
+			let wrongAudio = document.querySelector('#noobSound')
+
+
+			function setupListeners(circleArray, notificationSound) {
+				circleArray.forEach(circle => {
+					circle.addEventListener('click', () => {
+						circle.setAttribute('visible', false);
+						notificationSound.play();
+					});
+				})
+			}
+
+			setupListeners(redCircles, correctAudio)
+			setupListeners(greenCircles, wrongAudio)
+
+
+		</script>
+		<div class="a-loader-title" style="display: none;">Basic A-Frame Scene</div>
+
+	</a-scene>
+</body>
+
+</html>
